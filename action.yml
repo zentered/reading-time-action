@@ -1,0 +1,13 @@
+branding:
+  color: green
+  icon: check-square
+description: 'Calculate docs reading time in minutes'
+inputs:
+  path:
+    description: The path to the folder with docs and manifest.json
+    required: false
+    default: docs
+name: Calculate docs reading time
+runs:
+  main: dist/index.js
+  using: node12

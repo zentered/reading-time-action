@@ -1,0 +1,28 @@
+{
+  "routes": [
+    {
+      "heading": true,
+      "title": "Documentation",
+      "routes": [
+        {
+          "title": "One",
+          "path": "/docs/1.md"
+        },
+        {
+          "title": "Two",
+          "path": "/docs/2.md"
+        },
+        {
+          "heading": true,
+          "title": "Three",
+          "routes": [
+            {
+              "title": "Three One",
+              "path": "/docs/3/1.md"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

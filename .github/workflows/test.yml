@@ -1,0 +1,33 @@
+name: Integraton Test
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.1.5
+        with:
+          node-version: 12
+      - name: Reading Time to Manifest Action
+        uses: ./
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Test output
+        uses: actions/github-script@v4
+        with:
+          script: |
+            const test = require('./docs/manifest.json');
+
+            if (!test) {
+              core.setFailed('manifest not found');
+            }
+
+            if (!test || !test.routes || test.routes.length <= 0) {
+              core.setFailed('routes were not found');
+            }
+
+            if(!test.routes[0].routes[0].readingTime.text) {
+              core.setFailed('readingTime object was not found');
+            }
