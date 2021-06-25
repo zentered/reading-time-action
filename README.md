@@ -38,25 +38,39 @@ GitHub Action to calculate reading time of Markdown files in the specified folde
 }
 ```
 
-## Commit & Push
+## Complete Workflow with Commit & Push
 
-This action does not commit/push to your repo. You can use the [github-push-action](https://github.com/ad-m/github-push-action)
+This action does not commit/push to your repo. You can use the [github-push-action](https://github.com/ad-m/github-push-action). Here's a complete example:
 
 ```yaml
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Сalculate reading time
-        run: zentered/reading-time-action
-      - name: Commit Manifest
-        run: |
-          git commit manifest.json -m "chore: calculate reading time"
-      - name: Push changes
-        uses: ad-m/github-push-action@v0.6.0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
+name: Reading Time
+
+ on:
+   push:
+     branches:
+       - '**'
+       - '!main'
+     paths:
+       - 'docs/**'
+
+ jobs:
+   reading-time:
+     runs-on: ubuntu-latest
+     name: calculate reading time
+     steps:
+       - uses: actions/checkout@v2
+       - name: Сalculate reading time
+         uses: zentered/reading-time-action@v1.0.0
+       - name: Commit Manifest
+         run: |
+           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+           git config --local user.name "github-actions[bot]"
+           git commit docs/manifest.json -m "chore: calculate reading time"
+       - name: Push changes
+         uses: ad-m/github-push-action@v0.6.0
+         with:
+           github_token: ${{ secrets.GITHUB_TOKEN }}
+           branch: ${{ github.ref }}
 ```
 
 ## Contributing
