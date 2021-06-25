@@ -1,5 +1,6 @@
 {
   "name": "reading-time-check",
+  "private": true,
   "version": "0.0.0-development",
   "description": "GitHub Action to calculate reading time of Markdown files and add it to a manifest",
   "keywords": [
