@@ -1,7 +1,9 @@
+name: reading-time-action
+author: Zentered
 branding:
-  color: green
-  icon: check-square
-description: 'Calculate docs reading time in minutes'
+  color: orange
+  icon: clock
+description: 'GitHub Action to calculate the reading time of Markdown files and write the results to a manifest.json'
 inputs:
   path:
     description: The path to the folder with docs and manifest.json
